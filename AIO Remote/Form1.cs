@@ -17,7 +17,7 @@ namespace AIO_Remote
     {
         static SerialPort _serialPort;
         public static readonly bool _isOpen = false;
-        //BroadcastBlock<string> broadcaster = new BroadcastBlock<string>(null);
+        Dictionary<string, string> myDic = new Dictionary<string, string>();
 
         public Form1()
         {
@@ -28,6 +28,7 @@ namespace AIO_Remote
         {
             _serialPort = new SerialPort();
             System.Windows.Forms.ToolTip ToolTip1 = new System.Windows.Forms.ToolTip();
+
             ToolTip1.SetToolTip(this.buttonUp, "W");
             ToolTip1.SetToolTip(this.buttonDown, "S");
             ToolTip1.SetToolTip(this.buttonLeft, "A");
@@ -36,6 +37,16 @@ namespace AIO_Remote
             ToolTip1.SetToolTip(this.buttonMenu, "Q");
             ToolTip1.SetToolTip(this.buttonInput, "R");
             ToolTip1.SetToolTip(this.buttonPower, "P");
+
+            myDic.Add("W", "func osd_key_up\r\n");
+            myDic.Add("S", "func osd_key_down\r\n");
+            myDic.Add("A", "func osd_key_left\r\n");
+            myDic.Add("D", "func osd_key_right\r\n");
+            myDic.Add("Q", "func osd_key_menu\r\n");
+            myDic.Add("E", "func osd_key_enter\r\n");
+            myDic.Add("R", "func osd_key_input\r\n");
+            myDic.Add("P", "set icea_boot\r\n");
+
         }
 
         private void ButtonOpen_Click(object sender, EventArgs e)
@@ -58,82 +69,49 @@ namespace AIO_Remote
             }
         }
 
-        private void ButtonUp_Click(object sender, EventArgs e)
+        private void CommandWrite(string cmdString)
         {
             try
             {
-                _serialPort.Write("func osd_key_up\r\n");
+                if (true == (myDic.ContainsKey(cmdString)))
+                {
+                    _serialPort.Write(myDic[cmdString]);
+                }
             }
 
-            catch(Exception EX)
+            catch (Exception EX)
             {
                 MessageBox.Show(EX.Message);
             }
+        }
+        private void ButtonUp_Click(object sender, EventArgs e)
+        {
+            CommandWrite("W");
         }
 
         private void ButtonEnter_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _serialPort.Write("func osd_key_enter\r\n");
-            }
-
-            catch (Exception EX)
-            {
-                MessageBox.Show(EX.Message);
-            }
+            CommandWrite("E");
         }
 
         private void ButtonDown_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _serialPort.Write("func osd_key_down\r\n");
-            }
-
-            catch (Exception EX)
-            {
-                MessageBox.Show(EX.Message);
-            }
+            CommandWrite("S");
         }
 
         private void ButtonLeft_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _serialPort.Write("func osd_key_left\r\n");
-            }
-
-            catch (Exception EX)
-            {
-                MessageBox.Show(EX.Message);
-            }
+            CommandWrite("A");
         }
 
         private void ButtonRight_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _serialPort.Write("func osd_key_right\r\n");
-            }
-
-            catch (Exception EX)
-            {
-                MessageBox.Show(EX.Message);
-            }
+            CommandWrite("D");
         }
 
         private void ButtonPower_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _serialPort.Write("set icea_boot\r\n");
-            }
-
-            catch (Exception EX)
-            {
-                MessageBox.Show(EX.Message);
-            }
+            CommandWrite("P");
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -146,105 +124,18 @@ namespace AIO_Remote
 
         private void ButtonMenu_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _serialPort.Write("func osd_key_menu\r\n");
-            }
-
-            catch (Exception EX)
-            {
-                MessageBox.Show(EX.Message);
-            }
+            CommandWrite("Q");
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            switch(e.KeyCode)
-            {
-                case Keys.W:
-                    try
-                    {
-                        _serialPort.Write("func osd_key_up\r\n");
-                    }
+            KeysConverter kc = new KeysConverter();
+            CommandWrite(kc.ConvertToString(e.KeyCode));
+        }
 
-                    catch (Exception EX)
-                    {
-                        MessageBox.Show(EX.Message);
-                    }
-                    break;
-
-                case Keys.D:
-                    try
-                    {
-                        _serialPort.Write("func osd_key_right\r\n");
-                    }
-
-                    catch (Exception EX)
-                    {
-                        MessageBox.Show(EX.Message);
-                    }
-                    break;
-
-                case Keys.S:
-                    try
-                    {
-                        _serialPort.Write("func osd_key_down\r\n");
-                    }
-
-                    catch (Exception EX)
-                    {
-                        MessageBox.Show(EX.Message);
-                    }
-                    break;
-
-                case Keys.A:
-                    try
-                    {
-                        _serialPort.Write("func osd_key_left\r\n");
-                    }
-
-                    catch (Exception EX)
-                    {
-                        MessageBox.Show(EX.Message);
-                    }
-                    break;
-
-                case Keys.E:
-                    try
-                    {
-                        _serialPort.Write("func osd_key_enter\r\n");
-                    }
-
-                    catch (Exception EX)
-                    {
-                        MessageBox.Show(EX.Message);
-                    }
-                    break;
-
-                case Keys.Q:
-                    try
-                    {
-                        _serialPort.Write("func osd_key_menu\r\n");
-                    }
-
-                    catch (Exception EX)
-                    {
-                        MessageBox.Show(EX.Message);
-                    }
-                    break;
-
-                case Keys.R:
-                    try
-                    {
-                        _serialPort.Write("func osd_key_input\r\n");
-                    }
-
-                    catch (Exception EX)
-                    {
-                        MessageBox.Show(EX.Message);
-                    }
-                    break;
-            }
+        private void ButtonInput_Click(object sender, EventArgs e)
+        {
+            CommandWrite("R");
         }
 
         public static void DataReceive()
@@ -255,19 +146,6 @@ namespace AIO_Remote
             {
                 Int32 length = _serialPort.Read(ReceiveData, 0, ReceiveData.Length);
                 Console.Write(ReceiveData);
-            }
-        }
-
-        private void ButtonInput_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _serialPort.Write("func osd_key_input\r\n");
-            }
-
-            catch (Exception EX)
-            {
-                MessageBox.Show(EX.Message);
             }
         }
     }

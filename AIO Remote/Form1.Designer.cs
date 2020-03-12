@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.MessageGroup = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonEnter = new System.Windows.Forms.Button();
@@ -38,14 +40,34 @@
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.buttonMenu = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.buttonInput = new System.Windows.Forms.Button();
+            this.RemoteGroup = new System.Windows.Forms.GroupBox();
+            this.MessageGroup.SuspendLayout();
+            this.RemoteGroup.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // MessageGroup
+            // 
+            this.MessageGroup.Controls.Add(this.textBox1);
+            this.MessageGroup.Location = new System.Drawing.Point(12, 373);
+            this.MessageGroup.Name = "MessageGroup";
+            this.MessageGroup.Size = new System.Drawing.Size(318, 168);
+            this.MessageGroup.TabIndex = 21;
+            this.MessageGroup.TabStop = false;
+            this.MessageGroup.Text = "RS232 Message";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 21);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(299, 141);
+            this.textBox1.TabIndex = 0;
             // 
             // buttonUp
             // 
             this.buttonUp.Cursor = System.Windows.Forms.Cursors.Default;
-            this.buttonUp.Location = new System.Drawing.Point(117, 120);
+            this.buttonUp.Location = new System.Drawing.Point(109, 129);
             this.buttonUp.Name = "buttonUp";
             this.buttonUp.Size = new System.Drawing.Size(97, 48);
             this.buttonUp.TabIndex = 0;
@@ -55,7 +77,7 @@
             // 
             // buttonDown
             // 
-            this.buttonDown.Location = new System.Drawing.Point(117, 228);
+            this.buttonDown.Location = new System.Drawing.Point(109, 237);
             this.buttonDown.Name = "buttonDown";
             this.buttonDown.Size = new System.Drawing.Size(97, 48);
             this.buttonDown.TabIndex = 1;
@@ -65,7 +87,7 @@
             // 
             // buttonEnter
             // 
-            this.buttonEnter.Location = new System.Drawing.Point(117, 174);
+            this.buttonEnter.Location = new System.Drawing.Point(109, 183);
             this.buttonEnter.Name = "buttonEnter";
             this.buttonEnter.Size = new System.Drawing.Size(97, 48);
             this.buttonEnter.TabIndex = 2;
@@ -75,7 +97,7 @@
             // 
             // buttonRight
             // 
-            this.buttonRight.Location = new System.Drawing.Point(220, 174);
+            this.buttonRight.Location = new System.Drawing.Point(212, 183);
             this.buttonRight.Name = "buttonRight";
             this.buttonRight.Size = new System.Drawing.Size(97, 48);
             this.buttonRight.TabIndex = 3;
@@ -85,7 +107,7 @@
             // 
             // buttonPower
             // 
-            this.buttonPower.Location = new System.Drawing.Point(220, 12);
+            this.buttonPower.Location = new System.Drawing.Point(212, 21);
             this.buttonPower.Name = "buttonPower";
             this.buttonPower.Size = new System.Drawing.Size(97, 48);
             this.buttonPower.TabIndex = 4;
@@ -95,7 +117,7 @@
             // 
             // buttonLeft
             // 
-            this.buttonLeft.Location = new System.Drawing.Point(12, 174);
+            this.buttonLeft.Location = new System.Drawing.Point(6, 183);
             this.buttonLeft.Name = "buttonLeft";
             this.buttonLeft.Size = new System.Drawing.Size(97, 48);
             this.buttonLeft.TabIndex = 5;
@@ -105,7 +127,7 @@
             // 
             // buttonOpen
             // 
-            this.buttonOpen.Location = new System.Drawing.Point(12, 12);
+            this.buttonOpen.Location = new System.Drawing.Point(6, 21);
             this.buttonOpen.Name = "buttonOpen";
             this.buttonOpen.Size = new System.Drawing.Size(97, 48);
             this.buttonOpen.TabIndex = 16;
@@ -115,7 +137,7 @@
             // 
             // buttonMenu
             // 
-            this.buttonMenu.Location = new System.Drawing.Point(14, 282);
+            this.buttonMenu.Location = new System.Drawing.Point(6, 75);
             this.buttonMenu.Name = "buttonMenu";
             this.buttonMenu.Size = new System.Drawing.Size(97, 48);
             this.buttonMenu.TabIndex = 17;
@@ -123,17 +145,9 @@
             this.buttonMenu.UseVisualStyleBackColor = true;
             this.buttonMenu.Click += new System.EventHandler(this.ButtonMenu_Click);
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 432);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(305, 109);
-            this.richTextBox1.TabIndex = 18;
-            this.richTextBox1.Text = "";
-            // 
             // buttonInput
             // 
-            this.buttonInput.Location = new System.Drawing.Point(220, 282);
+            this.buttonInput.Location = new System.Drawing.Point(212, 75);
             this.buttonInput.Name = "buttonInput";
             this.buttonInput.Size = new System.Drawing.Size(97, 48);
             this.buttonInput.TabIndex = 19;
@@ -141,22 +155,32 @@
             this.buttonInput.UseVisualStyleBackColor = true;
             this.buttonInput.Click += new System.EventHandler(this.ButtonInput_Click);
             // 
+            // RemoteGroup
+            // 
+            this.RemoteGroup.Controls.Add(this.buttonOpen);
+            this.RemoteGroup.Controls.Add(this.buttonPower);
+            this.RemoteGroup.Controls.Add(this.buttonInput);
+            this.RemoteGroup.Controls.Add(this.buttonLeft);
+            this.RemoteGroup.Controls.Add(this.buttonMenu);
+            this.RemoteGroup.Controls.Add(this.buttonRight);
+            this.RemoteGroup.Controls.Add(this.buttonEnter);
+            this.RemoteGroup.Controls.Add(this.buttonDown);
+            this.RemoteGroup.Controls.Add(this.buttonUp);
+            this.RemoteGroup.Location = new System.Drawing.Point(12, 12);
+            this.RemoteGroup.Name = "RemoteGroup";
+            this.RemoteGroup.Size = new System.Drawing.Size(318, 355);
+            this.RemoteGroup.TabIndex = 22;
+            this.RemoteGroup.TabStop = false;
+            this.RemoteGroup.Text = "Remote Controller";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(329, 553);
-            this.Controls.Add(this.buttonInput);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.buttonMenu);
-            this.Controls.Add(this.buttonOpen);
-            this.Controls.Add(this.buttonLeft);
-            this.Controls.Add(this.buttonPower);
-            this.Controls.Add(this.buttonRight);
-            this.Controls.Add(this.buttonEnter);
-            this.Controls.Add(this.buttonDown);
-            this.Controls.Add(this.buttonUp);
+            this.ClientSize = new System.Drawing.Size(342, 553);
+            this.Controls.Add(this.MessageGroup);
+            this.Controls.Add(this.RemoteGroup);
             this.KeyPreview = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -164,6 +188,9 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.MessageGroup.ResumeLayout(false);
+            this.MessageGroup.PerformLayout();
+            this.RemoteGroup.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -171,6 +198,8 @@
         #endregion
 
         private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.GroupBox MessageGroup;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttonUp;
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonEnter;
@@ -179,8 +208,8 @@
         private System.Windows.Forms.Button buttonLeft;
         private System.Windows.Forms.Button buttonOpen;
         private System.Windows.Forms.Button buttonMenu;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button buttonInput;
+        private System.Windows.Forms.GroupBox RemoteGroup;
     }
 }
 

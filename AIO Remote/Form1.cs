@@ -84,6 +84,7 @@ namespace AIO_Remote
                 MessageBox.Show(EX.Message);
             }
         }
+
         private void ButtonUp_Click(object sender, EventArgs e)
         {
             CommandWrite("W");
@@ -147,6 +148,21 @@ namespace AIO_Remote
                 Int32 length = _serialPort.Read(ReceiveData, 0, ReceiveData.Length);
                 Console.Write(ReceiveData);
             }
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

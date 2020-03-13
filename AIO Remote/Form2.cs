@@ -14,13 +14,11 @@ namespace AIO_Remote
 {
     public partial class Form2 : Form
     {
-        SerialPort serialPort;
-        Thread RecivedThread;
+        public Form1 form1;
 
-        public Form2(SerialPort Port)
+        public Form2()
         {
             InitializeComponent();
-            serialPort = Port;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -33,6 +31,8 @@ namespace AIO_Remote
             string[] FlowCtrl = { "Xon/Xoff", "hardware", "none" };
 
             Array.Sort(Ports);
+
+            form1 = (Form1)this.Owner;
 
 #if SCAN_PORT
             SerialPort detectPort = new SerialPort();
@@ -76,17 +76,15 @@ namespace AIO_Remote
         {
             try
             {
-                if (false == serialPort.IsOpen)
+                if (false == form1._serialPort.IsOpen)
                 {
-                    serialPort.PortName = comboBoxPort.SelectedItem.ToString();
-                    serialPort.BaudRate = int.Parse(comboBoxSpeed.SelectedItem.ToString());
-                    serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), comboBoxParity.SelectedIndex.ToString(), true);
-                    serialPort.DataBits = comboBoxData.SelectedIndex == 0 ? 8 : 7;
-                    serialPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), comboBoxStopBits.SelectedIndex.ToString(), true); ;
-                    serialPort.Open();
-
-                    MessageBox.Show("Open OK!");
-
+                    form1._serialPort.PortName = comboBoxPort.SelectedItem.ToString();
+                    form1._serialPort.BaudRate = int.Parse(comboBoxSpeed.SelectedItem.ToString());
+                    form1._serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), comboBoxParity.SelectedIndex.ToString(), true);
+                    form1._serialPort.DataBits = comboBoxData.SelectedIndex == 0 ? 8 : 7;
+                    form1._serialPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), comboBoxStopBits.SelectedIndex.ToString(), true); ;
+                    form1._serialPort.Open();
+                    form1._isOpen = true;
                     Close();
                 }
                 else

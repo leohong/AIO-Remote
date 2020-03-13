@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.MessageGroup = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.MessageBox = new System.Windows.Forms.TextBox();
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonEnter = new System.Windows.Forms.Button();
@@ -48,7 +48,7 @@
             // 
             // MessageGroup
             // 
-            this.MessageGroup.Controls.Add(this.textBox1);
+            this.MessageGroup.Controls.Add(this.MessageBox);
             this.MessageGroup.Location = new System.Drawing.Point(12, 373);
             this.MessageGroup.Name = "MessageGroup";
             this.MessageGroup.Size = new System.Drawing.Size(318, 168);
@@ -56,13 +56,14 @@
             this.MessageGroup.TabStop = false;
             this.MessageGroup.Text = "RS232 Message";
             // 
-            // textBox1
+            // MessageBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 21);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(299, 141);
-            this.textBox1.TabIndex = 0;
+            this.MessageBox.Location = new System.Drawing.Point(6, 21);
+            this.MessageBox.Multiline = true;
+            this.MessageBox.Name = "MessageBox";
+            this.MessageBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.MessageBox.Size = new System.Drawing.Size(299, 141);
+            this.MessageBox.TabIndex = 0;
             // 
             // buttonUp
             // 
@@ -199,7 +200,7 @@
 
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.GroupBox MessageGroup;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox MessageBox;
         private System.Windows.Forms.Button buttonUp;
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonEnter;

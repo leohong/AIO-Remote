@@ -15,9 +15,11 @@ namespace AIO_Remote
 {
     public partial class Form1 : Form
     {
-        static SerialPort _serialPort;
-        public static readonly bool _isOpen = false;
+        private Thread readThread = null;
+        public SerialPort _serialPort;
+        public bool _isOpen = false;
         Dictionary<string, string> myDic = new Dictionary<string, string>();
+        delegate void Display(Byte[] buffer);
 
         public Form1()
         {
@@ -27,16 +29,16 @@ namespace AIO_Remote
         private void Form1_Load(object sender, EventArgs e)
         {
             _serialPort = new SerialPort();
-            System.Windows.Forms.ToolTip ToolTip1 = new System.Windows.Forms.ToolTip();
+            System.Windows.Forms.ToolTip toolTip = new System.Windows.Forms.ToolTip();
 
-            ToolTip1.SetToolTip(this.buttonUp, "W");
-            ToolTip1.SetToolTip(this.buttonDown, "S");
-            ToolTip1.SetToolTip(this.buttonLeft, "A");
-            ToolTip1.SetToolTip(this.buttonRight, "D");
-            ToolTip1.SetToolTip(this.buttonEnter, "E");
-            ToolTip1.SetToolTip(this.buttonMenu, "Q");
-            ToolTip1.SetToolTip(this.buttonInput, "R");
-            ToolTip1.SetToolTip(this.buttonPower, "P");
+            toolTip.SetToolTip(this.buttonUp, "W");
+            toolTip.SetToolTip(this.buttonDown, "S");
+            toolTip.SetToolTip(this.buttonLeft, "A");
+            toolTip.SetToolTip(this.buttonRight, "D");
+            toolTip.SetToolTip(this.buttonEnter, "E");
+            toolTip.SetToolTip(this.buttonMenu, "Q");
+            toolTip.SetToolTip(this.buttonInput, "R");
+            toolTip.SetToolTip(this.buttonPower, "P");
 
             myDic.Add("W", "func osd_key_up\r\n");
             myDic.Add("S", "func osd_key_down\r\n");
@@ -47,11 +49,13 @@ namespace AIO_Remote
             myDic.Add("R", "func osd_key_input\r\n");
             myDic.Add("P", "set icea_boot\r\n");
 
+            readThread = new Thread(new ThreadStart(this.serialRead));
+            readThread.Start();
         }
 
         private void ButtonOpen_Click(object sender, EventArgs e)
         {
-            Form2 formSerial = new Form2(_serialPort);
+            Form2 formSerial = new Form2();
             formSerial.Owner = this;
             formSerial.Show();
         }
@@ -65,7 +69,35 @@ namespace AIO_Remote
 
             catch(Exception EX)
             {
-                MessageBox.Show(EX.Message);
+                System.Windows.Forms.MessageBox.Show(EX.Message);
+            }
+        }
+
+        private void DisplayText(Byte[] buffer)
+        {
+            MessageBox.Text += System.Text.Encoding.Default.GetString(buffer);
+            MessageBox.SelectionStart = MessageBox.Text.Length;
+            MessageBox.ScrollToCaret();
+            //MessageBox.Refresh();
+        }
+
+        public void serialRead()
+        {
+            Byte[] buffer = new Byte[1024];
+            while (true)
+            {
+                if (true == _isOpen)
+                {
+                    if (_serialPort.BytesToRead > 0)
+                    {
+                        Int32 length = _serialPort.Read(buffer, 0, buffer.Length);
+                        Array.Resize(ref buffer, length);
+                        Display d = new Display(DisplayText);
+                        this.Invoke(d, new Object[] { buffer });
+                        Array.Resize(ref buffer, 1024);
+                    }
+                }
+                Thread.Sleep(16);
             }
         }
 
@@ -81,7 +113,7 @@ namespace AIO_Remote
 
             catch (Exception EX)
             {
-                MessageBox.Show(EX.Message);
+                System.Windows.Forms.MessageBox.Show(EX.Message);
             }
         }
 
@@ -119,6 +151,7 @@ namespace AIO_Remote
         {
             if(true == _isOpen)
             {
+                readThread.Abort();
                 CloseSerialPort();
             }
         }
@@ -137,32 +170,6 @@ namespace AIO_Remote
         private void ButtonInput_Click(object sender, EventArgs e)
         {
             CommandWrite("R");
-        }
-
-        public static void DataReceive()
-        {
-            char[] ReceiveData = new char[1024];
-
-            while(true)
-            {
-                Int32 length = _serialPort.Read(ReceiveData, 0, ReceiveData.Length);
-                Console.Write(ReceiveData);
-            }
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }

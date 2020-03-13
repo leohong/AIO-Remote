@@ -40,8 +40,8 @@
             this.comboBoxParity = new System.Windows.Forms.ComboBox();
             this.comboBoxStopBits = new System.Windows.Forms.ComboBox();
             this.comboBoxFlowControl = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.Open = new System.Windows.Forms.Button();
+            this.Cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -158,35 +158,35 @@
             this.comboBoxFlowControl.Size = new System.Drawing.Size(155, 31);
             this.comboBoxFlowControl.TabIndex = 11;
             // 
-            // button1
+            // Open
             // 
-            this.button1.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(298, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(127, 31);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Open.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Open.Location = new System.Drawing.Point(298, 12);
+            this.Open.Name = "Open";
+            this.Open.Size = new System.Drawing.Size(127, 31);
+            this.Open.TabIndex = 12;
+            this.Open.Text = "Open";
+            this.Open.UseVisualStyleBackColor = true;
+            this.Open.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // Cancel
             // 
-            this.button2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(298, 91);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(127, 31);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.Cancel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cancel.Location = new System.Drawing.Point(298, 91);
+            this.Cancel.Name = "Cancel";
+            this.Cancel.Size = new System.Drawing.Size(127, 31);
+            this.Cancel.TabIndex = 13;
+            this.Cancel.Text = "Cancel";
+            this.Cancel.UseVisualStyleBackColor = true;
+            this.Cancel.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 255);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Cancel);
+            this.Controls.Add(this.Open);
             this.Controls.Add(this.comboBoxFlowControl);
             this.Controls.Add(this.comboBoxStopBits);
             this.Controls.Add(this.comboBoxParity);
@@ -222,7 +222,7 @@
         private System.Windows.Forms.ComboBox comboBoxParity;
         private System.Windows.Forms.ComboBox comboBoxStopBits;
         private System.Windows.Forms.ComboBox comboBoxFlowControl;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Open;
+        private System.Windows.Forms.Button Cancel;
     }
 }

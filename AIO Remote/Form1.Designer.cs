@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.MessageGroup = new System.Windows.Forms.GroupBox();
+            this.TxBox = new System.Windows.Forms.TextBox();
             this.MessageBox = new System.Windows.Forms.TextBox();
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
@@ -42,27 +43,42 @@
             this.buttonMenu = new System.Windows.Forms.Button();
             this.buttonInput = new System.Windows.Forms.Button();
             this.RemoteGroup = new System.Windows.Forms.GroupBox();
+            this.buttonSend = new System.Windows.Forms.Button();
             this.MessageGroup.SuspendLayout();
             this.RemoteGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // MessageGroup
             // 
+            this.MessageGroup.Controls.Add(this.buttonSend);
+            this.MessageGroup.Controls.Add(this.TxBox);
             this.MessageGroup.Controls.Add(this.MessageBox);
-            this.MessageGroup.Location = new System.Drawing.Point(12, 373);
+            this.MessageGroup.Location = new System.Drawing.Point(12, 313);
             this.MessageGroup.Name = "MessageGroup";
-            this.MessageGroup.Size = new System.Drawing.Size(318, 168);
+            this.MessageGroup.Size = new System.Drawing.Size(318, 228);
             this.MessageGroup.TabIndex = 21;
             this.MessageGroup.TabStop = false;
             this.MessageGroup.Text = "RS232 Message";
             // 
+            // TxBox
+            // 
+            this.TxBox.BackColor = System.Drawing.SystemColors.Window;
+            this.TxBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.TxBox.Location = new System.Drawing.Point(6, 21);
+            this.TxBox.Multiline = true;
+            this.TxBox.Name = "TxBox";
+            this.TxBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxBox.Size = new System.Drawing.Size(200, 48);
+            this.TxBox.TabIndex = 1;
+            // 
             // MessageBox
             // 
-            this.MessageBox.Location = new System.Drawing.Point(6, 21);
+            this.MessageBox.BackColor = System.Drawing.SystemColors.Window;
+            this.MessageBox.Location = new System.Drawing.Point(6, 75);
             this.MessageBox.Multiline = true;
             this.MessageBox.Name = "MessageBox";
             this.MessageBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.MessageBox.Size = new System.Drawing.Size(299, 141);
+            this.MessageBox.Size = new System.Drawing.Size(303, 147);
             this.MessageBox.TabIndex = 0;
             // 
             // buttonUp
@@ -154,7 +170,6 @@
             this.buttonInput.TabIndex = 19;
             this.buttonInput.Text = "Input";
             this.buttonInput.UseVisualStyleBackColor = true;
-            this.buttonInput.Click += new System.EventHandler(this.ButtonInput_Click);
             // 
             // RemoteGroup
             // 
@@ -169,10 +184,20 @@
             this.RemoteGroup.Controls.Add(this.buttonUp);
             this.RemoteGroup.Location = new System.Drawing.Point(12, 12);
             this.RemoteGroup.Name = "RemoteGroup";
-            this.RemoteGroup.Size = new System.Drawing.Size(318, 355);
+            this.RemoteGroup.Size = new System.Drawing.Size(318, 295);
             this.RemoteGroup.TabIndex = 22;
             this.RemoteGroup.TabStop = false;
             this.RemoteGroup.Text = "Remote Controller";
+            // 
+            // buttonSend
+            // 
+            this.buttonSend.Location = new System.Drawing.Point(212, 21);
+            this.buttonSend.Name = "buttonSend";
+            this.buttonSend.Size = new System.Drawing.Size(97, 48);
+            this.buttonSend.TabIndex = 20;
+            this.buttonSend.Text = "Send";
+            this.buttonSend.UseVisualStyleBackColor = true;
+            this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
             // 
             // Form1
             // 
@@ -182,6 +207,7 @@
             this.ClientSize = new System.Drawing.Size(342, 553);
             this.Controls.Add(this.MessageGroup);
             this.Controls.Add(this.RemoteGroup);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -211,6 +237,8 @@
         private System.Windows.Forms.Button buttonMenu;
         private System.Windows.Forms.Button buttonInput;
         private System.Windows.Forms.GroupBox RemoteGroup;
+        private System.Windows.Forms.TextBox TxBox;
+        private System.Windows.Forms.Button buttonSend;
     }
 }
 

@@ -164,12 +164,21 @@ namespace AIO_Remote
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             KeysConverter kc = new KeysConverter();
-            CommandWrite(kc.ConvertToString(e.KeyCode));
+            if(TxBox.Focused == false)
+            {
+                CommandWrite(kc.ConvertToString(e.KeyCode));
+            }
         }
 
         private void ButtonInput_Click(object sender, EventArgs e)
         {
             CommandWrite("R");
+        }
+
+        private void buttonSend_Click(object sender, EventArgs e)
+        {
+            if (true == _isOpen) 
+                _serialPort.Write(TxBox.Text + '\r');
         }
     }
 }
